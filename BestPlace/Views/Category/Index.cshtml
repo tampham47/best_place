@@ -1,0 +1,12 @@
+﻿@model IEnumerable<BestPlace.Models.bp_Category>
+
+@{
+    Layout = null;
+}
+
+<div class="MetroPanel">
+@foreach (var item in Model)
+{
+    <a href="/Place/Index?categoryId=@item.CategoryId">@item.Name</a>
+}
+</div>

@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BestPlaceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="BestPlaceModelStoreContainer">
+    <EntitySet Name="aspnet_Users" EntityType="BestPlaceModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bp_Arrived" EntityType="BestPlaceModel.Store.bp_Arrived" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bp_Category" EntityType="BestPlaceModel.Store.bp_Category" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bp_Comment" EntityType="BestPlaceModel.Store.bp_Comment" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bp_Like" EntityType="BestPlaceModel.Store.bp_Like" store:Type="Tables" store:Schema="dbo" store:Name="bp_Like">
+      <DefiningQuery>SELECT 
+      [bp_Like].[ObjectId] AS [ObjectId], 
+      [bp_Like].[UserId] AS [UserId], 
+      [bp_Like].[DateCreate] AS [DateCreate]
+      FROM [dbo].[bp_Like] AS [bp_Like]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="bp_Location" EntityType="BestPlaceModel.Store.bp_Location" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bp_Photo" EntityType="BestPlaceModel.Store.bp_Photo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bp_Place" EntityType="BestPlaceModel.Store.bp_Place" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="bp_Profile" EntityType="BestPlaceModel.Store.bp_Profile" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_bp_Arrived_aspnet_Users" Association="BestPlaceModel.Store.FK_bp_Arrived_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Arrived" EntitySet="bp_Arrived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Arrived_bp_Place" Association="BestPlaceModel.Store.FK_bp_Arrived_bp_Place">
+      <End Role="bp_Place" EntitySet="bp_Place" />
+      <End Role="bp_Arrived" EntitySet="bp_Arrived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Comment_aspnet_Users" Association="BestPlaceModel.Store.FK_bp_Comment_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Comment" EntitySet="bp_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Comment_bp_Place" Association="BestPlaceModel.Store.FK_bp_Comment_bp_Place">
+      <End Role="bp_Place" EntitySet="bp_Place" />
+      <End Role="bp_Comment" EntitySet="bp_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Location_aspnet_Users" Association="BestPlaceModel.Store.FK_bp_Location_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Location" EntitySet="bp_Location" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Photo_aspnet_Users" Association="BestPlaceModel.Store.FK_bp_Photo_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Photo" EntitySet="bp_Photo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Place_aspnet_Users" Association="BestPlaceModel.Store.FK_bp_Place_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Place" EntitySet="bp_Place" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Place_bp_Category" Association="BestPlaceModel.Store.FK_bp_Place_bp_Category">
+      <End Role="bp_Category" EntitySet="bp_Category" />
+      <End Role="bp_Place" EntitySet="bp_Place" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Profile_aspnet_Users" Association="BestPlaceModel.Store.FK_bp_Profile_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Profile" EntitySet="bp_Profile" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="aspnet_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bp_Arrived">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="PlaceId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PlaceId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateCreate" Type="smalldatetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bp_Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Views" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bp_Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PlaceId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Content" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="DateCreate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'BestPlace.dbo.bp_Like' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="bp_Like">
+    <Key>
+      <PropertyRef Name="ObjectId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ObjectId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="DateCreate" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="bp_Location">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="256" />
+    <Property Name="DateCreate" Type="smalldatetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bp_Photo">
+    <Key>
+      <PropertyRef Name="PhotoId" />
+    </Key>
+    <Property Name="PhotoId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PlaceId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Path" Type="varchar" Nullable="false" MaxLength="256" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Descript" Type="nvarchar" MaxLength="256" />
+    <Property Name="Views" Type="float" Nullable="false" />
+    <Property Name="DateCreate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bp_Place">
+    <Key>
+      <PropertyRef Name="PlaceId" />
+    </Key>
+    <Property Name="PlaceId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="Latitude" Type="float" Nullable="false" />
+    <Property Name="Longitude" Type="float" Nullable="false" />
+    <Property Name="Descript" Type="ntext" Nullable="false" />
+    <Property Name="State" Type="int" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="16" />
+    <Property Name="Address" Type="nvarchar" MaxLength="256" />
+    <Property Name="WebSite" Type="nvarchar" MaxLength="512" />
+    <Property Name="Views" Type="float" Nullable="false" />
+    <Property Name="DateCreate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bp_Profile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ThirdPartyId" Type="varchar" Nullable="false" MaxLength="64" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="64" />
+    <Property Name="Avatar" Type="varchar" MaxLength="256" />
+    <Property Name="Email" Type="varchar" MaxLength="256" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="16" />
+    <Property Name="Birthday" Type="smalldatetime" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="Latitude" Type="float" />
+    <Property Name="Longitude" Type="float" />
+    <Property Name="DateCreated" Type="smalldatetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_bp_Arrived_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Arrived" Type="BestPlaceModel.Store.bp_Arrived" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Arrived">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Arrived_bp_Place">
+    <End Role="bp_Place" Type="BestPlaceModel.Store.bp_Place" Multiplicity="1" />
+    <End Role="bp_Arrived" Type="BestPlaceModel.Store.bp_Arrived" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bp_Place">
+        <PropertyRef Name="PlaceId" />
+      </Principal>
+      <Dependent Role="bp_Arrived">
+        <PropertyRef Name="PlaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Comment_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Comment" Type="BestPlaceModel.Store.bp_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Comment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Comment_bp_Place">
+    <End Role="bp_Place" Type="BestPlaceModel.Store.bp_Place" Multiplicity="1" />
+    <End Role="bp_Comment" Type="BestPlaceModel.Store.bp_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bp_Place">
+        <PropertyRef Name="PlaceId" />
+      </Principal>
+      <Dependent Role="bp_Comment">
+        <PropertyRef Name="PlaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Location_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Location" Type="BestPlaceModel.Store.bp_Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Location">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Photo_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Photo" Type="BestPlaceModel.Store.bp_Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Photo">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Place_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Place" Type="BestPlaceModel.Store.bp_Place" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Place">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Place_bp_Category">
+    <End Role="bp_Category" Type="BestPlaceModel.Store.bp_Category" Multiplicity="1" />
+    <End Role="bp_Place" Type="BestPlaceModel.Store.bp_Place" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bp_Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="bp_Place">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Profile_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.Store.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Profile" Type="BestPlaceModel.Store.bp_Profile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Profile">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="bp_Arrived_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Arrived_GetByPlaceId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Arrived_GetByUserId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Arrived_GetByUserPlace" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Category_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="bp_Category_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="categoryid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="bp_Category_PlusViews" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="categoryId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="bp_Comment_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="commentId" Type="uniqueidentifier" Mode="InOut" />
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="content" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="bp_Comment_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="commentId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Comment_GetByPlace" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Like_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjectId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Like_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjectId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Like_GetByObject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjectId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Like_GetByUserAndObject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ObjectId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="UserId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Location_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="locationId" Type="uniqueidentifier" Mode="InOut" />
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="latitude" Type="float" Mode="In" />
+    <Parameter Name="longitude" Type="float" Mode="In" />
+    <Parameter Name="address" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="bp_Location_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="locationId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Location_GetByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Location_GetTop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Location_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="locationId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Photo_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="photoId" Type="uniqueidentifier" Mode="InOut" />
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="path" Type="varchar" Mode="In" />
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+    <Parameter Name="descript" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="bp_Photo_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="photoId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Photo_DeleteByPlace" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Photo_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="photoId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Photo_GetByPlace" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Photo_PlusView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="photoId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Photo_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="photoId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="path" Type="varchar" Mode="In" />
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+    <Parameter Name="descript" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="bp_Place_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="categoryId" Type="int" Mode="In" />
+    <Parameter Name="title" Type="nvarchar" Mode="In" />
+    <Parameter Name="latitude" Type="float" Mode="In" />
+    <Parameter Name="longitude" Type="float" Mode="In" />
+    <Parameter Name="descript" Type="ntext" Mode="In" />
+    <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="nvarchar" Mode="In" />
+    <Parameter Name="webSite" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="bp_Place_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Place_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="bp_Place_GetByArrived" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Place_GetByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="categoryId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="bp_Place_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Place_PlusView" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Place_Search" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="requestStr" Type="nvarchar" Mode="In" />
+    <Parameter Name="categoryId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="bp_Place_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="categoryId" Type="int" Mode="In" />
+    <Parameter Name="title" Type="nvarchar" Mode="In" />
+    <Parameter Name="latitude" Type="float" Mode="In" />
+    <Parameter Name="longitude" Type="float" Mode="In" />
+    <Parameter Name="descript" Type="ntext" Mode="In" />
+    <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="address" Type="nvarchar" Mode="In" />
+    <Parameter Name="webSite" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="bp_Place_UpdateState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="placeId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="state" Type="int" Mode="In" />
+  </Function>
+  <Function Name="bp_Profile_Create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="thirdPartyId" Type="varchar" Mode="In" />
+    <Parameter Name="userName" Type="nvarchar" Mode="In" />
+    <Parameter Name="avatar" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="birthday" Type="smalldatetime" Mode="In" />
+    <Parameter Name="gender" Type="bit" Mode="In" />
+    <Parameter Name="latitude" Type="float" Mode="In" />
+    <Parameter Name="longitude" Type="float" Mode="In" />
+  </Function>
+  <Function Name="bp_Profile_GetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="bp_Profile_GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="bp_Profile_Search" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="requestStr" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="bp_Profile_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="userName" Type="nvarchar" Mode="In" />
+    <Parameter Name="avatar" Type="varchar" Mode="In" />
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="phoneNumber" Type="varchar" Mode="In" />
+    <Parameter Name="birthday" Type="smalldatetime" Mode="In" />
+    <Parameter Name="gender" Type="bit" Mode="In" />
+    <Parameter Name="latitude" Type="float" Mode="In" />
+    <Parameter Name="longitude" Type="float" Mode="In" />
+  </Function>
+</Schema>

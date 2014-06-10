@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+
+@using(BestPlace.Models.BestPlaceEntities db=new BestPlace.Models.BestPlaceEntities())
+{
+    <div class="MetroPanel">
+        <a href="/Search/All?request=@ViewBag.Request">Tất cả kết quả</a>
+        <a href="/Search/User?request=@ViewBag.Request">Bạn bè</a>
+        @foreach (var category in db.bp_Category_GetAll().ToList())
+        {
+            <a href="/Search/Index?categoryId=@category.CategoryId&request=@ViewBag.Request">@category.Name</a>
+        }
+        
+    </div>
+}
+

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BestPlace.Models.bp_Photo>
+
+@{
+    ViewBag.Title = "Photos";
+    Layout = "~/Views/Shared/_DetailsLayout.cshtml";
+}
+
+@section HeadPanel
+{
+    <script src="../../Scripts/fancyapps-fancyBox-3a66a9b/lib/jquery.mousewheel-3.0.6.pack.js"type="text/javascript"></script>
+
+    <link href="../../Scripts/fancyapps-fancyBox-3a66a9b/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/fancyapps-fancyBox-3a66a9b/source/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+    <link href="../../Scripts/fancyapps-fancyBox-3a66a9b/source/helpers/jquery.fancybox-buttons.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/fancyapps-fancyBox-3a66a9b/source/helpers/jquery.fancybox-buttons.js" type="text/javascript"></script>
+    <script src="../../Scripts/fancyapps-fancyBox-3a66a9b/source/helpers/jquery.fancybox-media.js" type="text/javascript"></script>
+
+    <link href="../../Scripts/fancyapps-fancyBox-3a66a9b/source/helpers/jquery.fancybox-thumbs.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/fancyapps-fancyBox-3a66a9b/source/helpers/jquery.fancybox-thumbs.js" type="text/javascript"></script>
+}
+
+<h2>Photos</h2>
+
+<table>
+@foreach (var item in Model)
+{ 
+<tr>
+    <td style="width:200px">
+        <div style="width:200px; max-height:140px; overflow:hidden; display:inline-block">
+            <a href="/Content/CoverImages/@item.Path" class="fancybox" rel="group" title="@item.Descript">
+                <img src="../../Content/CoverImages/@item.Path" width="100%"/>
+            </a>
+        </div>
+    </td>
+
+    <td style="vertical-align:top">
+       @* <span>@item.Descript</span><br />*@
+        <span>Bài thơ đầu anh viết tặng em, là bài thơ kể về đôi dép, khi nỗi nhớ trong lòng da diết, nhưng vật tầm thường cũng viết thành tho</span>
+        <div>
+            <table>
+            <tr>
+                <td></td>
+                <td style="width:120px">
+                    <a class="various fancybox.iframe DarkMetroButton" href="/Photo/Edit?photoId=@item.PhotoId">Edit</a>
+                </td>
+            </tr>
+            </table>
+        </div>
+    </td>
+</tr>
+}
+</table>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(".fancybox").fancybox({ padding: 7, closeBtn: false, titlePosition: 'inside' });
+    });
+
+    $(document).ready(function () {
+        $(".various").fancybox({
+            fitToView: false,
+            width: 520,
+            height: 180,
+            autoSize: false,
+            closeClick: false,
+            openEffect: 'none',
+            closeEffect: 'none',
+            closeBtn: false,
+            padding: 2
+        });
+    });
+</script>
+

@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BestPlaceModelStoreContainer" CdmEntityContainer="BestPlaceEntities">
+    <EntitySetMapping Name="aspnet_Users">
+      <EntityTypeMapping TypeName="BestPlaceModel.aspnet_Users">
+        <MappingFragment StoreEntitySet="aspnet_Users">
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bp_Category">
+      <EntityTypeMapping TypeName="BestPlaceModel.bp_Category">
+        <MappingFragment StoreEntitySet="bp_Category">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Views" ColumnName="Views" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bp_Comment">
+      <EntityTypeMapping TypeName="BestPlaceModel.bp_Comment">
+        <MappingFragment StoreEntitySet="bp_Comment">
+          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bp_Profile">
+      <EntityTypeMapping TypeName="BestPlaceModel.bp_Profile">
+        <MappingFragment StoreEntitySet="bp_Profile">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ThirdPartyId" ColumnName="ThirdPartyId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="bp_Category_GetAll" FunctionName="BestPlaceModel.Store.bp_Category_GetAll" />
+    <FunctionImportMapping FunctionImportName="bp_Category_PlusViews" FunctionName="BestPlaceModel.Store.bp_Category_PlusViews" />
+    <FunctionImportMapping FunctionImportName="bp_Comment_Create" FunctionName="BestPlaceModel.Store.bp_Comment_Create" />
+    <FunctionImportMapping FunctionImportName="bp_Comment_Delete" FunctionName="BestPlaceModel.Store.bp_Comment_Delete" />
+    <FunctionImportMapping FunctionImportName="bp_Comment_GetByPlace" FunctionName="BestPlaceModel.Store.bp_Comment_GetByPlace" />
+    <FunctionImportMapping FunctionImportName="bp_Photo_Create" FunctionName="BestPlaceModel.Store.bp_Photo_Create" />
+    <FunctionImportMapping FunctionImportName="bp_Photo_Delete" FunctionName="BestPlaceModel.Store.bp_Photo_Delete" />
+    <FunctionImportMapping FunctionImportName="bp_Photo_GetById" FunctionName="BestPlaceModel.Store.bp_Photo_GetById" />
+    <FunctionImportMapping FunctionImportName="bp_Photo_GetByPlace" FunctionName="BestPlaceModel.Store.bp_Photo_GetByPlace" />
+    <FunctionImportMapping FunctionImportName="bp_Photo_Update" FunctionName="BestPlaceModel.Store.bp_Photo_Update" />
+    <FunctionImportMapping FunctionImportName="bp_Place_Delete" FunctionName="BestPlaceModel.Store.bp_Place_Delete" />
+    <FunctionImportMapping FunctionImportName="bp_Place_GetByCategory" FunctionName="BestPlaceModel.Store.bp_Place_GetByCategory" />
+    <FunctionImportMapping FunctionImportName="bp_Place_GetById" FunctionName="BestPlaceModel.Store.bp_Place_GetById" />
+    <FunctionImportMapping FunctionImportName="bp_Place_Update" FunctionName="BestPlaceModel.Store.bp_Place_Update" />
+    <FunctionImportMapping FunctionImportName="bp_Profile_Create" FunctionName="BestPlaceModel.Store.bp_Profile_Create" />
+    <FunctionImportMapping FunctionImportName="bp_Profile_GetById" FunctionName="BestPlaceModel.Store.bp_Profile_GetById" />
+    <FunctionImportMapping FunctionImportName="bp_Profile_Update" FunctionName="BestPlaceModel.Store.bp_Profile_Update" />
+    <EntitySetMapping Name="bp_Place">
+      <EntityTypeMapping TypeName="BestPlaceModel.bp_Place">
+        <MappingFragment StoreEntitySet="bp_Place">
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Views" ColumnName="Views" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Descript" ColumnName="Descript" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="bp_Place_Create" FunctionName="BestPlaceModel.Store.bp_Place_Create" />
+    <FunctionImportMapping FunctionImportName="bp_Category_GetById" FunctionName="BestPlaceModel.Store.bp_Category_GetById" />
+    <EntitySetMapping Name="bp_Photo">
+      <EntityTypeMapping TypeName="BestPlaceModel.bp_Photo">
+        <MappingFragment StoreEntitySet="bp_Photo">
+          <ScalarProperty Name="Views" ColumnName="Views" />
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="Descript" ColumnName="Descript" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+          <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bp_Location">
+      <EntityTypeMapping TypeName="BestPlaceModel.bp_Location">
+        <MappingFragment StoreEntitySet="bp_Location">
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="bp_Location_Create" FunctionName="BestPlaceModel.Store.bp_Location_Create" />
+    <FunctionImportMapping FunctionImportName="bp_Location_Delete" FunctionName="BestPlaceModel.Store.bp_Location_Delete" />
+    <FunctionImportMapping FunctionImportName="bp_Location_GetByUser" FunctionName="BestPlaceModel.Store.bp_Location_GetByUser" />
+    <FunctionImportMapping FunctionImportName="bp_Location_GetTop" FunctionName="BestPlaceModel.Store.bp_Location_GetTop" />
+    <FunctionImportMapping FunctionImportName="bp_Location_Update" FunctionName="BestPlaceModel.Store.bp_Location_Update" />
+    <EntitySetMapping Name="bp_Like">
+      <EntityTypeMapping TypeName="BestPlaceModel.bp_Like">
+        <MappingFragment StoreEntitySet="bp_Like">
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="bp_Like_Create" FunctionName="BestPlaceModel.Store.bp_Like_Create" />
+    <FunctionImportMapping FunctionImportName="bp_Like_Delete" FunctionName="BestPlaceModel.Store.bp_Like_Delete" />
+    <FunctionImportMapping FunctionImportName="bp_Like_GetByObject" FunctionName="BestPlaceModel.Store.bp_Like_GetByObject" />
+    <FunctionImportMapping FunctionImportName="bp_Like_GetByUserAndObject" FunctionName="BestPlaceModel.Store.bp_Like_GetByUserAndObject" />
+    <FunctionImportMapping FunctionImportName="bp_Place_PlusView" FunctionName="BestPlaceModel.Store.bp_Place_PlusView" />
+    <FunctionImportMapping FunctionImportName="bp_Photo_PlusView" FunctionName="BestPlaceModel.Store.bp_Photo_PlusView" />
+    <EntitySetMapping Name="bp_Arrived">
+      <EntityTypeMapping TypeName="BestPlaceModel.bp_Arrived">
+        <MappingFragment StoreEntitySet="bp_Arrived">
+          <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+          <ScalarProperty Name="PlaceId" ColumnName="PlaceId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="bp_Arrived_Create" FunctionName="BestPlaceModel.Store.bp_Arrived_Create" />
+    <FunctionImportMapping FunctionImportName="bp_Arrived_GetByUserId" FunctionName="BestPlaceModel.Store.bp_Arrived_GetByUserId" />
+    <FunctionImportMapping FunctionImportName="bp_Arrived_GetByUserPlace" FunctionName="BestPlaceModel.Store.bp_Arrived_GetByUserPlace" />
+    <FunctionImportMapping FunctionImportName="bp_Place_GetByArrived" FunctionName="BestPlaceModel.Store.bp_Place_GetByArrived" />
+    <FunctionImportMapping FunctionImportName="bp_Arrived_GetByPlaceId" FunctionName="BestPlaceModel.Store.bp_Arrived_GetByPlaceId" />
+    <FunctionImportMapping FunctionImportName="bp_Place_Search" FunctionName="BestPlaceModel.Store.bp_Place_Search" />
+    <FunctionImportMapping FunctionImportName="bp_Place_UpdateState" FunctionName="BestPlaceModel.Store.bp_Place_UpdateState" />
+    <FunctionImportMapping FunctionImportName="bp_Place_GetByUser" FunctionName="BestPlaceModel.Store.bp_Place_GetByUser" />
+    <FunctionImportMapping FunctionImportName="bp_Location_GetById" FunctionName="BestPlaceModel.Store.bp_Location_GetById" />
+    <FunctionImportMapping FunctionImportName="bp_Profile_Search" FunctionName="BestPlaceModel.Store.bp_Profile_Search" />
+    <FunctionImportMapping FunctionImportName="bp_Profile_UpdateAvatar" FunctionName="BestPlaceModel.Store.bp_Profile_UpdateAvatar" />
+  </EntityContainerMapping>
+</Mapping>

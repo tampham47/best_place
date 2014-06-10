@@ -1,0 +1,34 @@
+﻿@model IEnumerable<BestPlace.Models.bp_Comment>
+
+@{
+    Layout = null;
+}
+
+<table>
+@foreach (var item in Model) {
+    <tr>
+        <td style="width:50px; vertical-align:top">
+            @*<img src="https://graph.facebook.com/@Membership.GetUser(item.UserId).UserName/picture" width="50px" height="50px" style="margin-top:1px"/>*@
+            <img src="@Html.GetProfile(item.UserId).Avatar" width="50px" height="50px" style="margin-top:1px"/>
+        </td>
+        <td style="vertical-align:top">
+            <b><a href="/User/Index?userId=@item.UserId">@Html.GetProfile(item.UserId).UserName</a></b> ▪ <span>@item.DateCreate.ToShortDateString()</span><br />
+            @item.Content
+        </td>
+    </tr>
+}
+</table>
+@if (Request.IsAuthenticated)
+{
+    @Html.Action("New", new { placeId = ViewBag.PlaceId })
+}
+else
+{
+    <table style="margin:0px; background:white">
+        <tr>
+            <td style="width:50px"><img src="../../Content/Images/bp.png" alt="bestplace" width="50px" style="margin-top:1px"/></td>
+            <td><a href="/Account/LogOn?returnUrl=http://localhost:4624/Place/Details?placeId=@ViewBag.PlaceId#Comment"><b style="color:#4682B4">Logon with facebook to comments</b></a></td>
+            <td style="width:50px"></td>
+        </tr>
+    </table>
+}

@@ -1,0 +1,44 @@
+﻿@if(Request.IsAuthenticated) {
+    @*var facebookId = long.Parse(User.Identity.Name);
+    var user = BestPlace.Models.InMemoryUserStore.Get(facebookId);
+    if (user != null)
+    {
+        var client = new Facebook.FacebookClient(user.AccessToken);
+
+        dynamic me = client.Get("me?fields=id,name");
+        string name = me.name;
+        string id = me.id;
+
+    <table style="margin:0px">
+        <tr>
+            <td style="width:30px"><img src="https://graph.facebook.com/@id/picture" alt="@name" width="30px" height="30px" style="margin-top:1px"/></td>
+            <td><a href="/Location"><b>@name</b></a></td>
+            <td style="width:50px"><a href="/Account/LogOff">LogOff</a></td>
+        </tr>
+    </table>
+    }*@
+    var userName = Membership.GetUser().UserName;
+    var client = new Facebook.FacebookClient();
+
+    dynamic me = client.Get(userName + "?fields=id,name");
+    string name = me.name;
+    string id = me.id;
+    
+    <table style="margin:0px">
+        <tr>
+            <td style="width:30px"><img src="https://graph.facebook.com/@id/picture" alt="@name" width="30px" height="30px" style="margin-top:1px"/></td>
+            <td><a href="/Location"><b>@name</b></a></td>
+            <td style="width:50px"><a href="/Account/LogOff">Logoff</a></td>
+        </tr>
+    </table>
+}
+else
+{
+    <table style="margin:0px; background:#4682B4">
+        <tr>
+            <td style="width:30px"><img src="../../Content/Images/bp.png" alt="bestplace" width="30px" style="margin-top:1px"/></td>
+            <td><a href="/Account/LogOn"><b style="color:White">Logon with facebook</b></a></td>
+            <td style="width:50px"></td>
+        </tr>
+    </table>
+}

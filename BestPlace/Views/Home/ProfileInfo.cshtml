@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "ProfileInfo";
+}
+
+<h2>ProfileInfo</h2>
+<img src="https://graph.facebook.com/@ViewBag.Id/picture" alt="@ViewBag.Name" width="30px"/>
+<b>@ViewBag.Name</b>
+<i>@ViewBag.UserId</i>
+<i>@ViewBag.Email</i>
+<i>@(((DateTime)ViewBag.Birthday).Day)</i>
+
+<a href="/Account/LogOff"><b>Out</b></a>

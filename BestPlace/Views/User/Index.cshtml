@@ -1,0 +1,81 @@
+﻿@model BestPlace.Models.bp_Profile
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<table style="margin-top:5px; margin-bottom:7px; height:40px">
+    <tr>
+        <td>
+            <b style="font-size:18px; color:Black; font-size:14px">
+                <span style="color:#F08080; font-size:16px">@Model.UserName</span>
+                <span>▪ Thông Tin</span>
+            </b>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <div style="display:inline-block; width:200px">
+        <img src="@Model.Avatar" alt="@Model.UserName" width="200px" style="margin-top:1px"/>
+    </div>
+
+    <div style="display:inline-block; width:350px; vertical-align:top">
+        <table style="vertical-align:top">
+            <tr>
+                <td style="width:70px">Tên</td>
+                <td><b>@Model.UserName</b></td>
+            </tr>
+
+            <tr>
+                <td>Email</td>
+                <td><b>@Model.Email</b></td>
+            </tr>
+
+            <tr>
+                <td>Ngày Sinh</td>
+                <td>
+                    @if (Model.Birthday.HasValue)
+                    {
+                        <b>@(((DateTime)Model.Birthday).ToShortDateString())</b>
+                    }
+                </td>
+            </tr>
+
+            <tr>
+                <td>Giới Tính</td>
+                <td>
+                    @if (Model.Gender.HasValue)
+                    {
+                        if (Model.Gender == true)
+                        {
+                            <b>Nam</b>
+                        }
+                        else
+                        {
+                            <b>Nữ</b>
+                        }
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    @if (Model.UserId == (Guid)Membership.GetUser().ProviderUserKey)
+    {
+        <table>
+        <tr>
+            <td></td>
+            <td style="width:120px">
+                <a href="/User/Update" class="DarkMetroButton">Chỉnh Sửa</a>
+            </td>
+        </tr>
+        </table>
+    }
+</div>
+
+@section RightPanel
+{
+    @Html.Action("UserMenu", "Home", new { userId = ViewBag.UserId })
+}

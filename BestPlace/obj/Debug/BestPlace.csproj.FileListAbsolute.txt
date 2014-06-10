@@ -1,0 +1,13 @@
+E:\CodeLib\BestPlace\BestPlace\bin\BestPlace.dll
+E:\CodeLib\BestPlace\BestPlace\bin\BestPlace.pdb
+E:\CodeLib\BestPlace\BestPlace\bin\EntityFramework.dll
+E:\CodeLib\BestPlace\BestPlace\bin\Telerik.Web.Mvc.dll
+E:\CodeLib\BestPlace\BestPlace\bin\EntityFramework.xml
+E:\CodeLib\BestPlace\BestPlace\bin\Telerik.Web.Mvc.xml
+E:\CodeLib\BestPlace\BestPlace\obj\Debug\BestPlace.csprojResolveAssemblyReference.cache
+E:\CodeLib\BestPlace\BestPlace\obj\Debug\BestPlace.dll
+E:\CodeLib\BestPlace\BestPlace\obj\Debug\BestPlace.pdb
+E:\CodeLib\BestPlace\BestPlace\bin\Facebook.pdb
+E:\CodeLib\BestPlace\BestPlace\bin\Facebook.xml
+E:\CodeLib\BestPlace\BestPlace\bin\Newtonsoft.Json.pdb
+E:\CodeLib\BestPlace\BestPlace\bin\Newtonsoft.Json.xml

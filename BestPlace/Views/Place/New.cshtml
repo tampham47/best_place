@@ -1,0 +1,145 @@
+﻿@model BestPlace.Models.bp_Place
+
+@{
+    ViewBag.Title = "Thêm địa điểm";
+}
+
+<table style="width:100%; height:40px">
+    <tr>
+        <td><b style="font-size:18px; color:Black; font-size:14px">Thêm địa điểm ▪ <span style="color:#F08080; font-size:16px">@ViewBag.CategoryName</span></b></td>
+
+        @*<td style="width:130px">
+            <a href="/Lab/New" class="IMetroButton">+New</a>
+        </td>*@
+    </tr>
+</table>
+
+<div>
+@using (Html.BeginForm())
+{
+    <div class="Element">
+        <div class="ImportantElement">Tên địa điểm*</div>
+        <div>
+            @Html.TextBoxFor(m => m.Title, new { style = "width:571px; height:22px; font-size:16px" })
+        </div>
+    </div>
+    
+        
+    <div class="Element">
+        <div>Địa chỉ</div>
+        <div>
+            @Html.TextBoxFor(m => m.Address, new { style = "width:400px; height:22px; font-size:16px" })
+        </div>
+    </div>
+    
+    <div class="Element">
+        <div>Điện thoại</div>
+        <div>
+            @Html.TextBoxFor(m => m.PhoneNumber, new { style = "width:400px; height:22px; font-size:16px" })
+        </div>
+    </div>
+    
+    <div class="Element">
+        <div>Website</div>
+        <div>
+            @Html.TextBoxFor(m => m.WebSite, new { style = "width:400px; height:22px; font-size:16px" })
+        </div>
+    </div>
+    
+    <div class="Element">
+        <div class="ImportantElement">Chọn vị trí*</div>
+        <div id="map_canvas" style="width:100%; height:300px"></div>
+    </div>
+    
+    <div class="Element">
+        <div class="ImportantElement" style="margin-bottom:-7px">Mô tả*</div>
+        <div>
+            @(Html.Telerik().EditorFor(m => m.Descript).Name("Descript").HtmlAttributes(new { style = "height:250px" }).Tools(tool => tool
+            .Clear().Bold().Italic().Underline().Separator()
+            .JustifyCenter().JustifyFull().JustifyLeft().JustifyRight().Separator()
+            .Indent().Outdent().Separator()
+            .InsertOrderedList().InsertUnorderedList().Separator()
+            .FontColor().BackColor()).HtmlAttributes(new { style = "margin-left:-4px" }))
+
+        </div>
+    </div>
+    
+    <div class="Element">
+        <div class="ImportantElement">Photos* (bạn phải có ít nhất một hình ảnh)</div>
+        <div>
+            @(Html.Telerik().Upload()
+            .Name("attachments")
+            .Multiple(true)
+            .HtmlAttributes(new { style = "width:100%" })
+            .Async(async => async
+                .Save("Save", "Upload", new { placeId = Model.PlaceId })
+                .Remove("Remove", "Upload", new { placeId = Model.PlaceId })
+                .AutoUpload(true)))
+        </div>
+    </div>
+    
+    <div class="Element">
+        @Html.HiddenFor(m => m.Latitude)
+        @Html.HiddenFor(m => m.Longitude)
+        @Html.HiddenFor(m => m.CategoryId)
+        @Html.HiddenFor(m => m.PlaceId)
+        <div style="width:120px; margin-left:auto">
+            <input type="submit" value="Publish" class="DarkMetroButton" style="border:none"/>
+        </div>
+    </div>
+}
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        Init();
+
+        // Try HTML5 geolocation
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                myLocation = new google.maps.LatLng(position.coords.latitude,
+                                             position.coords.longitude);
+
+
+                map.setCenter(myLocation);
+                $("#Latitude").val(myLocation.lat());
+                $("#Longitude").val(myLocation.lng());
+
+                //bonus
+                var marker = new google.maps.Marker({
+                    position: myLocation,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    title: "Select your place"
+                });
+                marker.setMap(map);
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    var infowindow = new google.maps.InfoWindow({
+                        content: "Select your place where you want to notify."
+                    });
+                    infowindow.open(map, marker);
+                });
+
+                google.maps.event.addListener(marker, 'dragend', function () {
+                    $("#Latitude").val(marker.getPosition().lat());
+                    $("#Longitude").val(marker.getPosition().lng());
+                });
+
+            }, function () {
+                handleNoGeolocation(true);
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleNoGeolocation(false);
+        }
+
+        // Create the DIV to hold the control and call the HomeControl() constructor
+        // passing in this DIV.
+        var homeControlDiv = document.createElement('DIV');
+        var homeControl = new HomeControl(homeControlDiv, map);
+
+        homeControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(homeControlDiv);
+    });
+</script>

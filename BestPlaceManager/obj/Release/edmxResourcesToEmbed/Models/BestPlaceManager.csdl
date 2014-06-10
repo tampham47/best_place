@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BestPlaceModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="BestPlaceEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="aspnet_Users" EntityType="BestPlaceModel.aspnet_Users" />
+    <EntitySet Name="bp_Arrived" EntityType="BestPlaceModel.bp_Arrived" />
+    <EntitySet Name="bp_Category" EntityType="BestPlaceModel.bp_Category" />
+    <EntitySet Name="bp_Comment" EntityType="BestPlaceModel.bp_Comment" />
+    <EntitySet Name="bp_Like" EntityType="BestPlaceModel.bp_Like" />
+    <EntitySet Name="bp_Location" EntityType="BestPlaceModel.bp_Location" />
+    <EntitySet Name="bp_Photo" EntityType="BestPlaceModel.bp_Photo" />
+    <EntitySet Name="bp_Place" EntityType="BestPlaceModel.bp_Place" />
+    <EntitySet Name="bp_Profile" EntityType="BestPlaceModel.bp_Profile" />
+    <AssociationSet Name="FK_bp_Arrived_aspnet_Users" Association="BestPlaceModel.FK_bp_Arrived_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Arrived" EntitySet="bp_Arrived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Comment_aspnet_Users" Association="BestPlaceModel.FK_bp_Comment_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Comment" EntitySet="bp_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Location_aspnet_Users" Association="BestPlaceModel.FK_bp_Location_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Location" EntitySet="bp_Location" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Photo_aspnet_Users" Association="BestPlaceModel.FK_bp_Photo_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Photo" EntitySet="bp_Photo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Place_aspnet_Users" Association="BestPlaceModel.FK_bp_Place_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Place" EntitySet="bp_Place" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Profile_aspnet_Users" Association="BestPlaceModel.FK_bp_Profile_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="bp_Profile" EntitySet="bp_Profile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Arrived_bp_Place" Association="BestPlaceModel.FK_bp_Arrived_bp_Place">
+      <End Role="bp_Place" EntitySet="bp_Place" />
+      <End Role="bp_Arrived" EntitySet="bp_Arrived" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Place_bp_Category" Association="BestPlaceModel.FK_bp_Place_bp_Category">
+      <End Role="bp_Category" EntitySet="bp_Category" />
+      <End Role="bp_Place" EntitySet="bp_Place" />
+    </AssociationSet>
+    <AssociationSet Name="FK_bp_Comment_bp_Place" Association="BestPlaceModel.FK_bp_Comment_bp_Place">
+      <End Role="bp_Place" EntitySet="bp_Place" />
+      <End Role="bp_Comment" EntitySet="bp_Comment" />
+    </AssociationSet>
+    <FunctionImport Name="bp_Place_GetAll" EntitySet="bp_Place" ReturnType="Collection(BestPlaceModel.bp_Place)" />
+    <FunctionImport Name="bp_Place_GetById" EntitySet="bp_Place" ReturnType="Collection(BestPlaceModel.bp_Place)">
+      <Parameter Name="placeId" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="bp_Place_UpdateState">
+      <Parameter Name="placeId" Mode="In" Type="Guid" />
+      <Parameter Name="state" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="bp_Profile_GetAll" EntitySet="bp_Profile" ReturnType="Collection(BestPlaceModel.bp_Profile)" />
+    <FunctionImport Name="bp_Profile_Search" EntitySet="bp_Profile" ReturnType="Collection(BestPlaceModel.bp_Profile)">
+      <Parameter Name="requestStr" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="bp_Arrived_GetByPlaceId" EntitySet="bp_Arrived" ReturnType="Collection(BestPlaceModel.bp_Arrived)">
+      <Parameter Name="placeId" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <FunctionImport Name="bp_Photo_GetByPlace" EntitySet="bp_Photo" ReturnType="Collection(BestPlaceModel.bp_Photo)">
+      <Parameter Name="placeId" Mode="In" Type="Guid" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="aspnet_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+    <Property Name="LoweredUserName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+    <Property Name="MobileAlias" Type="String" MaxLength="16" Unicode="true" FixedLength="false" />
+    <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+    <Property Name="LastActivityDate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="bp_Arrived" Relationship="BestPlaceModel.FK_bp_Arrived_aspnet_Users" FromRole="aspnet_Users" ToRole="bp_Arrived" />
+    <NavigationProperty Name="bp_Comment" Relationship="BestPlaceModel.FK_bp_Comment_aspnet_Users" FromRole="aspnet_Users" ToRole="bp_Comment" />
+    <NavigationProperty Name="bp_Location" Relationship="BestPlaceModel.FK_bp_Location_aspnet_Users" FromRole="aspnet_Users" ToRole="bp_Location" />
+    <NavigationProperty Name="bp_Photo" Relationship="BestPlaceModel.FK_bp_Photo_aspnet_Users" FromRole="aspnet_Users" ToRole="bp_Photo" />
+    <NavigationProperty Name="bp_Place" Relationship="BestPlaceModel.FK_bp_Place_aspnet_Users" FromRole="aspnet_Users" ToRole="bp_Place" />
+    <NavigationProperty Name="bp_Profile" Relationship="BestPlaceModel.FK_bp_Profile_aspnet_Users" FromRole="aspnet_Users" ToRole="bp_Profile" />
+  </EntityType>
+  <EntityType Name="bp_Arrived">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="PlaceId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="PlaceId" Type="Guid" Nullable="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="BestPlaceModel.FK_bp_Arrived_aspnet_Users" FromRole="bp_Arrived" ToRole="aspnet_Users" />
+    <NavigationProperty Name="bp_Place" Relationship="BestPlaceModel.FK_bp_Arrived_bp_Place" FromRole="bp_Arrived" ToRole="bp_Place" />
+  </EntityType>
+  <EntityType Name="bp_Category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
+    <Property Name="Views" Type="Double" Nullable="false" />
+    <NavigationProperty Name="bp_Place" Relationship="BestPlaceModel.FK_bp_Place_bp_Category" FromRole="bp_Category" ToRole="bp_Place" />
+  </EntityType>
+  <EntityType Name="bp_Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="PlaceId" Type="Guid" Nullable="false" />
+    <Property Name="Content" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="BestPlaceModel.FK_bp_Comment_aspnet_Users" FromRole="bp_Comment" ToRole="aspnet_Users" />
+    <NavigationProperty Name="bp_Place" Relationship="BestPlaceModel.FK_bp_Comment_bp_Place" FromRole="bp_Comment" ToRole="bp_Place" />
+  </EntityType>
+  <EntityType Name="bp_Like">
+    <Key>
+      <PropertyRef Name="ObjectId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ObjectId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="DateCreate" Type="DateTime" />
+  </EntityType>
+  <EntityType Name="bp_Location">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="BestPlaceModel.FK_bp_Location_aspnet_Users" FromRole="bp_Location" ToRole="aspnet_Users" />
+  </EntityType>
+  <EntityType Name="bp_Photo">
+    <Key>
+      <PropertyRef Name="PhotoId" />
+    </Key>
+    <Property Name="PhotoId" Type="Guid" Nullable="false" />
+    <Property Name="PlaceId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="Path" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+    <Property Name="Descript" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+    <Property Name="Views" Type="Double" Nullable="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="BestPlaceModel.FK_bp_Photo_aspnet_Users" FromRole="bp_Photo" ToRole="aspnet_Users" />
+  </EntityType>
+  <EntityType Name="bp_Place">
+    <Key>
+      <PropertyRef Name="PlaceId" />
+    </Key>
+    <Property Name="PlaceId" Type="Guid" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+    <Property Name="Latitude" Type="Double" Nullable="false" />
+    <Property Name="Longitude" Type="Double" Nullable="false" />
+    <Property Name="Descript" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="State" Type="Int32" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="Address" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+    <Property Name="WebSite" Type="String" MaxLength="512" Unicode="true" FixedLength="false" />
+    <Property Name="Views" Type="Double" Nullable="false" />
+    <Property Name="DateCreate" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="BestPlaceModel.FK_bp_Place_aspnet_Users" FromRole="bp_Place" ToRole="aspnet_Users" />
+    <NavigationProperty Name="bp_Arrived" Relationship="BestPlaceModel.FK_bp_Arrived_bp_Place" FromRole="bp_Place" ToRole="bp_Arrived" />
+    <NavigationProperty Name="bp_Category" Relationship="BestPlaceModel.FK_bp_Place_bp_Category" FromRole="bp_Place" ToRole="bp_Category" />
+    <NavigationProperty Name="bp_Comment" Relationship="BestPlaceModel.FK_bp_Comment_bp_Place" FromRole="bp_Place" ToRole="bp_Comment" />
+  </EntityType>
+  <EntityType Name="bp_Profile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="ThirdPartyId" Type="String" Nullable="false" MaxLength="64" Unicode="false" FixedLength="false" />
+    <Property Name="UserName" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
+    <Property Name="Avatar" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="Birthday" Type="DateTime" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="Latitude" Type="Double" />
+    <Property Name="Longitude" Type="Double" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="BestPlaceModel.FK_bp_Profile_aspnet_Users" FromRole="bp_Profile" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_bp_Arrived_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Arrived" Type="BestPlaceModel.bp_Arrived" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Arrived">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Comment_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Comment" Type="BestPlaceModel.bp_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Comment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Location_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Location" Type="BestPlaceModel.bp_Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Location">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Photo_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Photo" Type="BestPlaceModel.bp_Photo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Photo">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Place_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Place" Type="BestPlaceModel.bp_Place" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Place">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Profile_aspnet_Users">
+    <End Role="aspnet_Users" Type="BestPlaceModel.aspnet_Users" Multiplicity="1" />
+    <End Role="bp_Profile" Type="BestPlaceModel.bp_Profile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="bp_Profile">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Arrived_bp_Place">
+    <End Role="bp_Place" Type="BestPlaceModel.bp_Place" Multiplicity="1" />
+    <End Role="bp_Arrived" Type="BestPlaceModel.bp_Arrived" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bp_Place">
+        <PropertyRef Name="PlaceId" />
+      </Principal>
+      <Dependent Role="bp_Arrived">
+        <PropertyRef Name="PlaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Place_bp_Category">
+    <End Role="bp_Category" Type="BestPlaceModel.bp_Category" Multiplicity="1" />
+    <End Role="bp_Place" Type="BestPlaceModel.bp_Place" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bp_Category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="bp_Place">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_bp_Comment_bp_Place">
+    <End Role="bp_Place" Type="BestPlaceModel.bp_Place" Multiplicity="1" />
+    <End Role="bp_Comment" Type="BestPlaceModel.bp_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bp_Place">
+        <PropertyRef Name="PlaceId" />
+      </Principal>
+      <Dependent Role="bp_Comment">
+        <PropertyRef Name="PlaceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

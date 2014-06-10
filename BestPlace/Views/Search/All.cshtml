@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "All";
+    Layout = "~/Views/Shared/_DetailsLayout.cshtml";
+}
+
+@using (BestPlace.Models.BestPlaceEntities db = new BestPlace.Models.BestPlaceEntities())
+{
+    foreach (var category in db.bp_Category_GetAll().ToList())
+    {
+        if (db.bp_Place_Search((string)ViewBag.Request, category.CategoryId).Count() > 0)
+        {
+            <table style="width:100%">
+                <tr>
+                    <td><span style="font-size:18px">Search </span><b style="font-size:18px; color:Black;">▪ <span style="color:#F08080; font-size:16px">
+                        <a href="/Search/Index?categoryId=@category.CategoryId&request=@ViewBag.Request">@category.Name</a>
+                    </span></b></td>
+
+                    <td style="width:130px">
+                        <a href="/Place/New?categoryId=@category.CategoryId" class="IMetroButton">+New</a>
+                    </td>
+                </tr>
+            </table>
+    
+            @Html.Partial("/Views/Place/ViewPlaceList.cshtml", db.bp_Place_Search((string)ViewBag.Request, category.CategoryId).Take(3).ToList())
+        }
+    }
+}
+
+@*@section rightPanel
+{
+    @using(BestPlace.Models.BestPlaceEntities db=new BestPlace.Models.BestPlaceEntities())
+    {
+        <div class="MetroPanel">
+            <a href="/Search/All?request=@ViewBag.Request">Tất cả kết quả</a>
+            @foreach (var category in db.bp_Category_GetAll().ToList())
+            {
+                <a href="/Search/Index?categoryId=@category.CategoryId&request=@ViewBag.Request">@category.Name</a>
+            }
+        </div>
+    }
+}*@
+
+@section rightPanel
+{
+    @Html.Action("SearchMenu", new { request = @ViewBag.Request })
+}

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<BestPlace.Models.bp_Place>
+
+@{
+    Layout = null;
+}
+
+<table>
+@foreach (var item in Model) {
+    <tr>
+        <td style="width:200px; vertical-align:top">
+            <div style="width:200px; max-height:150px; overflow:hidden">
+                <a href="/Place/Details?placeId=@item.PlaceId">
+                    <img src="../../Content/CoverImages/@Html.Photos(item.PlaceId)[0].Path" width="200px" />
+                </a>
+            </div>
+        </td>
+        <td style="vertical-align:top">
+            <a href="/Place/Details?placeId=@item.PlaceId"><b>@item.Title</b></a><br />
+            <span>@Html.GetProfile(item.UserId).UserName</span>
+            <span>·</span>
+            <span class="SimpleButton">@item.DateCreate.ToShortDateString()</span> <br />
+            <p>@Html.Truncate(HttpUtility.HtmlDecode(item.Descript), 256)</p>
+        </td>
+    </tr>
+}
+</table>

@@ -1,0 +1,101 @@
+﻿@model BestPlace.Models.bp_Profile
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<table style="margin-top:5px; margin-bottom:7px; height:40px">
+    <tr>
+        <td>
+            <b style="font-size:18px; color:Black; font-size:14px">
+                <span style="color:#F08080; font-size:16px">@Model.UserName</span>
+                <span>▪ Thông Tin</span>
+            </b>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <div style="display:inline-block; width:200px">
+    @if (Model.ThirdPartyId == "bp")
+    {
+        <img src="/Content/CoverImages/@Model.Avatar" alt="@Model.UserName" width="200px" style="margin-top:1px"/>
+    }
+    else
+    {
+        <img src="@Model.Avatar" alt="@Model.UserName" width="200px" style="margin-top:1px"/>
+    }
+    </div>
+
+    <div style="display:inline-block; width:350px; vertical-align:top; margin-left:10px">
+        @using (Html.BeginForm())
+        {
+            <div>
+                <div class="Element">
+                    <div class="ImportantElement">Họ Tên</div>
+                    <div>
+                        @Html.TextBoxFor(m => m.UserName)
+                    </div>
+                </div>
+
+                <div class="Element">
+                    <div class="ImportantElement">Điện thoại</div>
+                    <div>
+                        @Html.TextBoxFor(m => m.PhoneNumber)
+                    </div>
+                </div>
+
+                @*<div class="Element">
+                    <div class="ImportantElement">Giới tính</div>
+                    <div>
+                        @Html.CheckBoxFor(m =>m.Gender)
+                    </div>
+                </div>*@
+
+                <div class="Element">
+                    <div class="ImportantElement">Ngày sinh</div>
+                    <div>
+                        @Html.Telerik().DatePickerFor(m => m.Birthday)
+                    </div>
+                </div>
+
+                <div class="Element">
+                    <div class="ImportantElement">Ảnh đại diện</div>
+                    <div>
+                        @(Html.Telerik().Upload()
+                        .Name("avatarAttachments")
+                        .Multiple(false)
+                        .HtmlAttributes(new { style = "width:100%" })
+                        .Async(async => async
+                        .Save("Profile_UploadAvatar", "Upload", new { userId = @Model.UserId })
+                            .Remove("Remove", "Upload", new { userId = @Model.UserId })
+                            .AutoUpload(true)))
+                    </div>
+                </div>
+
+                <div>
+                    @Html.HiddenFor(m => m.UserId)
+                    @Html.HiddenFor(m => m.Email)
+                    <table>
+                    <tr>
+                        <td></td>
+                        <td style="width:120px">
+                            <input class="DarkMetroButton" type="submit" value="Cập nhật" style="border-style:none" />
+                        </td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section RightPanel
+{
+    @Html.Action("UserMenu", "Home", new { userId = Model.UserId })
+}
+
+
+
+

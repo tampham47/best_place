@@ -1,0 +1,30 @@
+﻿@model BestPlace.Models.bp_Comment
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("New", "Comment", FormMethod.Post))
+{
+<table style="width:100%">
+    <tr>
+        <td style="width:50px; vertical-align:top">
+            @*<img src="https://graph.facebook.com/@Membership.GetUser(item.UserId).UserName/picture" width="50px" height="50px" style="margin-top:1px"/>*@
+            <img src="@Html.GetProfile(Model.UserId).Avatar" width="50px" height="50px" style="margin-top:1px"/>
+        </td>
+
+        <td style="vertical-align:top">
+            @*<b>@Model.FullName</b><br />*@
+            @Html.HiddenFor(m => m.PlaceId)
+
+            <div style="width:100%">
+                @Html.TextAreaFor(m => m.Content, new { style = "width:99%; height:45px" })
+
+                <input type="submit" value="Reply" class="IMetroButton" style="border-style:none; width:70px; line-height:0.8em; margin-left:auto;" />
+            </div>
+        </td>
+    </tr>
+
+</table>
+    
+}

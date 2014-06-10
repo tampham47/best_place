@@ -1,0 +1,7 @@
+E:\CodeLib\BestPlace\BestPlaceManager\obj\Release\BestPlaceManager.csprojResolveAssemblyReference.cache
+E:\CodeLib\BestPlace\BestPlaceManager\bin\BestPlaceManager.dll
+E:\CodeLib\BestPlace\BestPlaceManager\bin\BestPlaceManager.pdb
+E:\CodeLib\BestPlace\BestPlaceManager\bin\Facebook.dll
+E:\CodeLib\BestPlace\BestPlaceManager\bin\Newtonsoft.Json.dll
+E:\CodeLib\BestPlace\BestPlaceManager\obj\Release\BestPlaceManager.dll
+E:\CodeLib\BestPlace\BestPlaceManager\obj\Release\BestPlaceManager.pdb

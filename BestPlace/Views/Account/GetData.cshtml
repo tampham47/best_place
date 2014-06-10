@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "GetData";
+}
+
+<h2>GetData</h2>
+
+<script>
+    var accessToken = window.location.hash.substring(1);
+    window.location = "/Account/OAuthClient?" + accessToken;
+</script>
+

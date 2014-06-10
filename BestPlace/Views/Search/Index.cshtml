@@ -1,0 +1,56 @@
+﻿@model IEnumerable<BestPlace.Models.bp_Place>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "/Views/Shared/_DetailsLayout.cshtml";
+}
+
+<table style="width:100%">
+    <tr>
+        <td><span style="font-size:18px">Search </span><b style="font-size:18px; color:Black;">▪ <span style="color:#F08080; font-size:16px">@ViewBag.CategoryName</span></b></td>
+
+        <td style="width:130px">
+            <a href="/Place/New?categoryId=@ViewBag.CategoryId" class="IMetroButton">+New</a>
+        </td>
+    </tr>
+</table>
+
+<table>
+@foreach (var item in Model) {
+    <tr>
+        <td style="width:200px; vertical-align:top">
+            <div style="width:200px; max-height:150px; overflow:hidden">
+                <a href="/Place/Details?placeId=@item.PlaceId">
+                    <img src="../../Content/CoverImages/@Html.Photos(item.PlaceId)[0].Path" width="200px" />
+                </a>
+            </div>
+        </td>
+        <td style="vertical-align:top">
+            <a href="/Place/Details?placeId=@item.PlaceId"><b>@item.Title</b></a><br />
+            <span>@Html.GetProfile(item.UserId).UserName</span>
+            <span>·</span>
+            <span class="SimpleButton">@item.DateCreate.ToShortDateString()</span> <br />
+            <p>@Html.Truncate(HttpUtility.HtmlDecode(item.Descript), 256)</p>
+        </td>
+    </tr>
+}
+</table>
+
+@*@section rightPanel
+{
+    @using(BestPlace.Models.BestPlaceEntities db=new BestPlace.Models.BestPlaceEntities())
+    {
+        <div class="MetroPanel">
+            <a href="/Search/All?request=@ViewBag.Request">Tất cả kết quả</a>
+            @foreach (var category in db.bp_Category_GetAll().ToList())
+            {
+                <a href="/Search/Index?categoryId=@category.CategoryId&request=@ViewBag.Request">@category.Name</a>
+            }
+        </div>
+    }
+}*@
+
+@section rightPanel
+{
+    @Html.Action("SearchMenu", new { request = @ViewBag.Request })
+}

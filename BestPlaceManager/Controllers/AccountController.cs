@@ -1,0 +1,158 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Facebook;
+using BestPlace.Models;
+using System.Web.Security;
+using System.Globalization;
+using BestPlaceManager.Models;
+
+namespace BestPlaceManager.Controllers
+{
+    public class AccountController : Controller
+    {
+        private const string logoffUrl = "http://localhost:4624";
+        private const string redirectUrl = "http://localhost:4624/Account/OAuth";
+
+        //private const string logoffUrl = "http://bestplace.vn/";
+        //private const string redirectUrl = "http://bestplace.vn/Account/OAuth";
+
+        //
+        // GET: /Account/LogOn/
+
+        public ActionResult LogOn(string returnUrl)
+        {
+            var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current);
+            oAuthClient.RedirectUri = new Uri(redirectUrl);
+            var loginUri = oAuthClient.GetLoginUrl(new Dictionary<string, object> { { "state", returnUrl }, { "scope", "email,user_birthday,offline_access" } });
+
+            return Redirect(loginUri.AbsoluteUri);
+        }
+
+        //
+        // GET: /Account/OAuth/
+
+        public ActionResult OAuth(string code, string state)
+        {
+            
+            FacebookOAuthResult oauthResult;
+            if (FacebookOAuthResult.TryParse(Request.Url, out oauthResult))
+            {
+                if (oauthResult.IsSuccess)
+                {
+                    var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current);
+                    oAuthClient.RedirectUri = new Uri(redirectUrl);
+
+                    dynamic tokenResult = oAuthClient.ExchangeCodeForAccessToken(code);
+                    string accessToken = tokenResult.access_token;
+
+                    DateTime expiresOn = DateTime.MaxValue;
+
+                    if (tokenResult.ContainsKey("expires"))
+                    {
+                        DateTimeConvertor.FromUnixTime(tokenResult.expires);
+                    }
+
+                    FacebookClient fbClient = new FacebookClient(accessToken);
+                    dynamic me = fbClient.Get("me?fields=id,name,email,birthday,gender");
+                    long facebookId = Convert.ToInt64(me.id);
+
+                    InMemoryUserStore.Add(new FacebookUser
+                    {
+                        AccessToken = accessToken,
+                        Expires = expiresOn,
+                        FacebookId = facebookId,
+                        Name = (string)me.name,
+                    });
+
+                    FormsAuthentication.SetAuthCookie(facebookId.ToString(), false);
+
+                    var user = Membership.GetUser(facebookId.ToString());
+                    string format = "d";
+                    CultureInfo provider = CultureInfo.InvariantCulture;
+                    DateTime birthday = new DateTime();
+                    try
+                    {
+                        birthday = DateTime.ParseExact(me.birthday, format, provider);
+                    }
+                    catch
+                    {
+                    }
+
+                    if (user == null)
+                    {
+                        var u = Membership.CreateUser(facebookId.ToString(), Guid.NewGuid().ToString());
+                        using (BestPlaceEntities db = new BestPlaceEntities())
+                        {
+                            db.bp_Profile_Create((Guid)u.ProviderUserKey,
+                                facebookId.ToString(),
+                                (string)me.name,
+                                null,
+                                (string)me.email,
+                                null,
+                                birthday,
+                                ((string)me.gender == "male") ? true : false,
+                                null, null);
+                        }
+
+                    }
+                    else
+                    {
+                        using (BestPlaceEntities db = new BestPlaceEntities())
+                        {
+                            db.bp_Profile_Update((Guid)user.ProviderUserKey,
+                                (string)me.name,
+                                null,
+                                (string)me.email,
+                                null,
+                                birthday,
+                                ((string)me.gender == "male") ? true : false,
+                                null, null);
+                        }
+                    }
+
+                    // prevent open redirection attack by checking if the url is local.
+                    if (Url.IsLocalUrl(state))
+                    {
+                        return Redirect(state);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        //
+        // GET: /Account/LogOff/
+
+        public ActionResult LogOff()
+        {
+            var facebookId = long.Parse(User.Identity.Name);
+            var user = InMemoryUserStore.Get(facebookId);
+
+            FormsAuthentication.SignOut();
+            if (user != null)
+            {
+                var logoutUrl = String.Format("https://www.facebook.com/logout.php?next={0}&access_token={1}", logoffUrl, user.AccessToken);
+                return Redirect(logoutUrl);
+            }
+            else
+            {
+                return Redirect(logoffUrl);
+            }
+
+            
+            //var oAuthClient = new FacebookOAuthClient(FacebookApplication.Current);
+            //oAuthClient.RedirectUri = new Uri(logoffUrl);
+            //var logoutUrl = oAuthClient.GetLogoutUrl();
+            //return Redirect(logoutUrl);//.AbsoluteUri);
+        }
+
+    }
+}

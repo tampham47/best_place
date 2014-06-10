@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BestPlace.Models.bp_Place>
+
+@{
+    ViewBag.Title = ViewBag.CategoryName;
+}
+
+<table style="width:100%">
+    <tr>
+        <td><b style="font-size:18px; color:Black; font-size:14px">▪ <span style="color:#F08080; font-size:16px">@ViewBag.CategoryName</span></b></td>
+
+        <td style="width:130px">
+            <a href="/Place/New?categoryId=@ViewBag.CategoryId" class="DarkMetroButton">+New</a>
+        </td>
+    </tr>
+</table>
+
+<table>
+@foreach (var item in Model) {
+    <tr>
+
+        <td style="width:200px; vertical-align:top">
+            <div style="width:200px; max-height:150px; overflow:hidden">
+                <a href="/Place/Details?placeId=@item.PlaceId">
+                    <img src="../../Content/CoverImages/@Html.Photos(item.PlaceId)[0].Path" width="200px" />
+                </a>
+            </div>
+        </td>
+
+        <td style="vertical-align:top">
+            <a href="/Place/Details?placeId=@item.PlaceId"><b>@item.Title</b></a><br />
+            <span>@Html.GetProfile(item.UserId).UserName</span>
+            <span>·</span>
+            <span class="SimpleButton">@item.DateCreate.ToShortDateString()</span> <br />
+            <p>@Html.Truncate(HttpUtility.HtmlDecode(item.Descript), 256)</p>
+        </td>
+    </tr>
+}
+</table>

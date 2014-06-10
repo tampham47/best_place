@@ -1,0 +1,78 @@
+﻿@model BestPlace.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_AccountLayout.cshtml";
+}
+
+@section Title
+{
+    <table style="margin:0px;">
+        <tr>
+            <td style="width:30px"><img src="../../Content/Images/bp.png" alt="bestplace" width="30px" style="margin-top:1px"/></td>
+            <td><a href="/Account/LogOn"><b style="color:Black">Đăng Ký</b></a></td>
+            <td style="width:50px"></td>
+        </tr>
+    </table>
+}
+
+@section RightPanel
+{
+@using (Html.BeginForm())
+{
+    <div>
+        <div class="Element">
+            <div class="ImportantElement">Email</div>
+            <div>
+                @Html.TextBoxFor(m => m.Email, new { style = "height:24px; width:236px; font-size:18px;" })
+            </div>
+        </div>
+        <div class="Element">
+            <div class="ImportantElement">Mật khẩu</div>
+            <div>
+                @Html.PasswordFor(m => m.Password, new { style = "height:24px; width:236px; font-size:18px;" })
+            </div>
+        </div>
+        <div class="Element">
+            <div class="ImportantElement">Xác nhận mật khẩu</div>
+            <div>
+                @Html.PasswordFor(m => m.ConfirmPassword, new { style = "height:24px; width:236px; font-size:18px;" })
+            </div>
+        </div>
+        <div class="Element">
+            <div class="ImportantElement">Họ Tên</div>
+            <div>
+                @Html.TextBoxFor(m => m.UserName, new { style = "height:24px; width:236px; font-size:18px;" })
+            </div>
+        </div>
+
+        <table>
+        <tr>
+            <td></td>
+            <td style="width:80px">
+                <a href="BpLogOn" class="LightMetroButton">Đăng Nhập</a>
+            </td>
+            <td style="width:120px">
+                <input type="submit" value="Đăng ký" class="DarkMetroButton" style="border-style:none"/>
+            </td>
+        </tr>
+        </table>
+    </div>
+}
+}
+
+<div>
+    <div style="margin-top:15px">
+        <img src="../../Content/Images/bp-Bed-white.png" width="50px" />
+        <img src="../../Content/Images/bp-Juice.png" width="50px"  />
+        <img src="../../Content/Images/bp-Market-green.png" width="50px"  />
+        <img src="../../Content/Images/bp-Restaurant-sv.png" width="50px"  />
+        <img src="../../Content/Images/bp-Saloon.png" width="50px"  />
+        <img src="../../Content/Images/bp-Travel%20Luggage.png" width="50px" />
+        <img src="../../Content/Images/bp_Add.png" width="50px" />
+    </div>
+
+    <p style="font-size:12px; font-family:tahoma">
+        Bestplace là dự án về địa điểm bao gồm website và một số ứng dụng di động (iphone, android, window phone) nhằm gợi ý cho người dùng những địa điểm thú vị, những quán ăn ngon xung quanh mình như nhà hàng, khách sạn, quán cafe… với nhiều thông tin chi tiết (địa chỉ, số điện thoại, hình ảnh thực tế, giá cả….)  giúp người dùng có chọn lựa thích hợp cho buổi hẹn hay những chuyến đi xa của mình.
+    </p>
+</div>

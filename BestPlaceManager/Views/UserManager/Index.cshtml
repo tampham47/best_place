@@ -1,0 +1,17 @@
+﻿@model IEnumerable<BestPlaceManager.Models.bp_Profile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table>
+@foreach (var item in Model)
+{
+<tr>
+    <td style="width:50px"><img src="https://graph.facebook.com/@item.ThirdPartyId/picture" alt="@item.UserName" width="50px" style="margin-top:1px"/></td>
+    <td>
+        <p>@item.UserName</p>
+    </td>
+</tr>
+}
+</table>

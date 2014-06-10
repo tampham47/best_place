@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestPlace", "BestPlace\BestPlace.csproj", "{AF018D61-846E-4C2F-8732-3C092C560943}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestPlaceManager", "..\BestPlaceManager\BestPlaceManager\BestPlaceManager.csproj", "{4E6652DA-C3FA-47DE-A666-A8F3B628FCC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E6652DA-C3FA-47DE-A666-A8F3B628FCC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E6652DA-C3FA-47DE-A666-A8F3B628FCC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E6652DA-C3FA-47DE-A666-A8F3B628FCC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E6652DA-C3FA-47DE-A666-A8F3B628FCC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF018D61-846E-4C2F-8732-3C092C560943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF018D61-846E-4C2F-8732-3C092C560943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF018D61-846E-4C2F-8732-3C092C560943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF018D61-846E-4C2F-8732-3C092C560943}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,25 @@
+﻿@model BestPlace.Models.bp_Profile
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<table style="width:100%; margin-bottom:15px;">
+    <tr>
+        @*<td style="width:50px;"></td>*@
+        <td style="width:50px; padding:0px;">
+            <img src="../../Content/Images/Other-Search-Metro.ico" width="30px" height="30px" style="float:right; margin-top:0px"/>
+        </td>
+        <td style="width:240px">
+            @using (Html.BeginForm("Search", "UserManager"))
+            {
+                @Html.TextBox("str", (ViewBag.Request != null) ? (string)ViewBag.Request : "", new { style = "height:26px; width:240px; font-size:16px; margin-top:-1px" })
+            }
+        </td>
+        
+        <td>
+            <span class="SimpleButton">@ViewBag.AmountOfUser user</span>
+        </td>
+    </tr>
+</table>
+

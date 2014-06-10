@@ -1,0 +1,86 @@
+﻿@model BestPlace.Models.bp_Location
+
+@{
+    ViewBag.Title = "Location";
+    Layout = "/Views/Shared/_DetailsLayout.cshtml";
+}
+
+<div>
+@using (Html.BeginForm())
+{
+    <div class="Element">
+        <div>Địa chỉ</div>
+        <div>
+            @Html.TextBoxFor(m => m.Address, new { style = "width:100%; height:22px; font-size:16px" })
+        </div>
+    </div>
+    
+    <div class="Element">
+        <div class="ImportantElement">Chọn vị trí*</div>
+        <div id="map_canvas" style="width:100%; height:300px"></div>
+    </div>
+    
+    <div class="Element">
+        @Html.HiddenFor(m => m.Latitude)
+        @Html.HiddenFor(m => m.Longitude)
+        <div style="width:120px; margin-left:auto">
+            <input type="submit" value="Publish" class="IMetroButton" style="border:none"/>
+        </div>
+    </div>
+}
+</div>
+
+@section RightPanel
+{
+    <div class="MetroPanel">
+        <a href="#">Thông tin</a>
+        <a href="#">Thêm địa chỉ</a>
+        <a href="#">Địa chỉ của tôi</a>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        Init();
+
+        // Try HTML5 geolocation
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+                map.setCenter(myLocation);
+
+                //bonus
+                var marker = new google.maps.Marker({
+                    position: myLocation,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    title: "Select your place"
+                });
+                marker.setMap(map);
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    var infowindow = new google.maps.InfoWindow({
+                        content: "Select your place."
+                    });
+                    infowindow.open(map, marker);
+                });
+
+                google.maps.event.addListener(marker, 'dragend', function () {
+                    $("#Latitude").val(marker.getPosition().lat());
+                    $("#Longitude").val(marker.getPosition().lng());
+                });
+
+            }, function () {
+                handleNoGeolocation(true);
+            });
+        } else {
+            handleNoGeolocation(false);
+        }
+
+        var homeControlDiv = document.createElement('DIV');
+        var homeControl = new HomeControl(homeControlDiv, map);
+        homeControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(homeControlDiv);
+    });
+</script>

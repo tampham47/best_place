@@ -1,0 +1,24 @@
+﻿@model IEnumerable<BestPlace.Models.bp_Place>
+
+@{
+    ViewBag.Title = "User";
+    Layout = "/Views/Shared/_UserLayout.cshtml";
+}
+
+<table style="margin-top:5px; margin-bottom:7px; height:40px">
+    <tr>
+        <td>
+            <b style="font-size:18px; color:Black; font-size:14px">
+                <span style="color:#F08080; font-size:16px">@ViewBag.UserName</span>
+                <span>▪ Những địa điểm đã tạo</span>
+            </b>
+        </td>
+    </tr>
+</table>
+
+@Html.Partial(@"/Views/Place/ViewPlaceList.cshtml", Model)
+
+@section RightPanel
+{
+    @Html.Action("UserMenu", "Home", new { userId = ViewBag.UserId })
+}
